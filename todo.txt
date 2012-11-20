@@ -1,0 +1,14 @@
+WeeWikiPaint
+
+MVP:
+- marketing home page
+- collab pain page (basic)
+- wiki-fy pages
+- complex pages?
+
+User stories:
+- * "hello world" server
+
+Engineering tasks:
+* automated build
+- static code analysis (lint)
