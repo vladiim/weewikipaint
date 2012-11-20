@@ -1,1 +1,5 @@
 WeeKikiPaint
+
+To build:
+- Requires Node.js
+- Run ./jake.sh to build
