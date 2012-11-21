@@ -10,5 +10,4 @@ User stories:
 - * "hello world" server
 
 Engineering tasks:
-* automated build
-- static code analysis (lint)
+- continuous inte
