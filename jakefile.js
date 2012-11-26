@@ -18,13 +18,13 @@
 
   desc("Integrate");
   task("integrate", ["default"], function() {
-    colsole.log("1. Make sure 'git status' is clean.");
+    console.log("1. Make sure 'git status' is clean.");
     console.log("2. Build on the integrateion box.");
-    colsole.log("   a. Walk over to ingration box.");
-    colsole.log("   b. 'git pull'.");
-    colsole.log("   c. 'jake'.");
-    colsole.log("3. 'git checkout integration'.");
-    colsole.log("4. 'git merge master --no-ff --log'.");
+    console.log("   a. Walk over to ingration box.");
+    console.log("   b. 'git pull'.");
+    console.log("   c. 'jake'.");
+    console.log("3. 'git checkout integration'.");
+    console.log("4. 'git merge master --no-ff --log'.");
     console.log("5. 'git checkout master'.");
   });
 
