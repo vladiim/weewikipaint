@@ -10,4 +10,4 @@ User stories:
 - * "hello world" server
 
 Engineering tasks:
-- continuous inte
+* continuous integration
