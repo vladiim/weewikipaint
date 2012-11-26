@@ -11,3 +11,6 @@ User stories:
 
 Engineering tasks:
 * continuous integration
+
+To do:
+- Make build fil when lint fails
