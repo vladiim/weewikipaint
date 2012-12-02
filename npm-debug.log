@@ -1,0 +1,52 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install', 'node', '0.8.4' ]
+2 info using npm@1.1.30
+3 info using node@v0.6.14
+4 verbose node symlink /usr/local/bin/node
+5 verbose config file /Users/vladi/.npmrc
+6 verbose config file /usr/local/etc/npmrc
+7 verbose config file /usr/local/lib/node_modules/npm/npmrc
+8 verbose read json /Users/vladi/code/edu/weewikipaint/package.json
+9 verbose read json /Users/vladi/code/edu/weewikipaint/node_modules/jake/package.json
+10 verbose read json /Users/vladi/code/edu/weewikipaint/node_modules/jshint/package.json
+11 verbose read json /Users/vladi/code/edu/weewikipaint/node_modules/nodeunit/package.json
+12 verbose read json /Users/vladi/code/edu/weewikipaint/package.json
+13 verbose cache add [ 'node', null ]
+14 silly cache add name=undefined spec="node" args=["node",null]
+15 verbose parsed url { pathname: 'node', path: 'node', href: 'node' }
+16 verbose cache add [ '0.8.4', null ]
+17 silly cache add name=undefined spec="0.8.4" args=["0.8.4",null]
+18 verbose parsed url { pathname: '0.8.4', path: '0.8.4', href: '0.8.4' }
+19 verbose addNamed [ 'node', '' ]
+20 verbose addNamed [ null, '' ]
+21 silly addNameRange { name: 'node', range: '', hasData: false }
+22 verbose addNamed [ '0.8.4', '' ]
+23 verbose addNamed [ null, '' ]
+24 silly addNameRange { name: '0.8.4', range: '', hasData: false }
+25 verbose url raw node
+26 verbose url resolving [ 'https://registry.npmjs.org/', './node' ]
+27 verbose url resolved https://registry.npmjs.org/node
+28 http GET https://registry.npmjs.org/node
+29 verbose url raw 0.8.4
+30 verbose url resolving [ 'https://registry.npmjs.org/', './0.8.4' ]
+31 verbose url resolved https://registry.npmjs.org/0.8.4
+32 http GET https://registry.npmjs.org/0.8.4
+33 error Error: getaddrinfo ENOENT
+33 error     at errnoException (dns.js:31:11)
+33 error     at Object.onanswer [as oncomplete] (dns.js:140:16)
+33 error  { [Error: getaddrinfo ENOENT] code: 'ENOTFOUND', errno: 'ENOTFOUND', syscall: 'getaddrinfo' }
+34 error You may report this log at:
+34 error     <http://github.com/isaacs/npm/issues>
+34 error or email it to:
+34 error     <npm-@googlegroups.com>
+35 error System Darwin 11.4.2
+36 error command "node" "/usr/local/bin/npm" "install" "node" "0.8.4"
+37 error cwd /Users/vladi/code/edu/weewikipaint
+38 error node -v v0.6.14
+39 error npm -v 1.1.30
+40 error syscall getaddrinfo
+41 error code ENOTFOUND
+42 error message getaddrinfo ENOENT
+43 error errno ENOTFOUND
+44 error ENOTFOUND errno
+45 verbose exit [ 1, true ]
