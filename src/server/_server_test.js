@@ -3,15 +3,17 @@
 var server = require("./server.js");
 var http   = require("http");
 
-exports.tearDown = function(done) {
-  
-  server.stop(function() {
-    done();
-  });
+exports.setUp = function(done) {
+  server.start(8080);
+  done();
+};
+
+exports.tearDown = function(done) {  
+  server.stop(function() { done(); });
 };
 
 exports.test_ServerRespondsToGet = function(test) {
-  server.start();
+  // server.start();
 
   http.get("http://localhost:8080", function(response) {
   	test.done();
@@ -19,7 +21,7 @@ exports.test_ServerRespondsToGet = function(test) {
 };
 
 exports.test_serverReturnsHelloWorld = function(test) {
-  server.start();
+  // server.start();
 
   var request = http.get("http://localhost:8080");
   request.on("response", function(response) {
@@ -37,4 +39,9 @@ exports.test_serverReturnsHelloWorld = function(test) {
       test.done();
     });
   });
+};
+
+exports.test_serverRunsCallbackWhenStopCompletes = function(test) {
+  server.stop(function() { test.done(); });
+  server.start();
 };
