@@ -9,9 +9,9 @@ exports.test_serverReturnsHelloWorld = function(test) {
   var request = http.get("http://localhost:8080");
 
   request.on("response", function(response) {
-  	var receivedData = false;
-  	response.setEncoding("utf8");
-  	test.equals(200, response.statusCode, "status code");
+    var receivedData = false;
+    response.setEncoding("utf8");
+    test.equals(200, response.statusCode, "status code");
 
     response.on("data", function(chunk) {
       receivedData = true;
