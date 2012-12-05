@@ -42,10 +42,10 @@
   // desc("Ensure correct version of Node is present");
   task("node", [], function() {
     // check the node version is v0.8.14 or higher
-    var NODE_VERSION = "v0.8.14\n";
+    var NODE_VERSION = "v0.8.14";
 
     sh("node --version", function(stdout) {
-      if (stdout !== NODE_VERSION) fail("Need Node " + NODE_VERSION);
+      if (stdout.trim() !== NODE_VERSION) fail("Need Node " + NODE_VERSION);
       complete();
     });
   }, { async: true });
