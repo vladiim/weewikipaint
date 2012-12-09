@@ -1,11 +1,19 @@
-/*global desc, task, jake, fail, complete */
+/*global desc, task, jake, fail, complete, directory */
 (function() {
   "use strict";
 
-  var NODE_VERSION = "v0.8.14";
+  var NODE_VERSION       = "v0.8.14";
+  var TEMP_TEST_FILE_DIR = "generated/test";
+
+  directory(TEMP_TEST_FILE_DIR);
 
   desc("Build and test");
   task("default", ["lint", "test"]);
+
+  desc("Delete generated files");
+  task("cleanDir", [], function() {
+    jake.rmRf("generated");
+  });
 
   desc("Lint everything");
   task("lint", ["nodeVersion"], function() {
@@ -20,7 +28,7 @@
   });
 
   desc("Test everything");
-  task("test", ["nodeVersion"], function() {
+  task("test", ["nodeVersion", TEMP_TEST_FILE_DIR], function() {
     var reporter = require("nodeunit").reporters["default"];
     reporter.run(['src/server/_server_test.js'], null, function(failures) {
       if (failures) fail("Tests failed");
@@ -69,7 +77,7 @@
   function parseNodeVersion(description, versionString) {
     var versionMatcher = /^v(\d+)\.(\d+)\.(\d+)$/;  // v[major].[minor].[bugfix]
     var versionInfo    = versionString.match(versionMatcher);
-    if (versionInfo == null) fail("Count not parse " + description + " (was '" + versionString + "')");
+    if (versionInfo === null) fail("Count not parse " + description + " (was '" + versionString + "')");
 
     var major  = parseInt(versionInfo[1], 10);
     var minor  = parseInt(versionInfo[2], 10);
