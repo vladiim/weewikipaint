@@ -1,7 +1,7 @@
 WeeWikiPaint
 
 Up to:
-http://www.letscodejavascript.com/v1/full_season/ep17.html
+http://www.letscodejavascript.com/v1/full_season/ep19.html
 
 MVP:
 - marketing home page

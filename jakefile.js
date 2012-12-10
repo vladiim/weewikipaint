@@ -3,7 +3,8 @@
   "use strict";
 
   var NODE_VERSION       = "v0.8.14";
-  var TEMP_TEST_FILE_DIR = "generated/test";
+  var GENERATED_DIR      = "generated";
+  var TEMP_TEST_FILE_DIR = GENERATED_DIR + "/test";
 
   directory(TEMP_TEST_FILE_DIR);
 
@@ -12,7 +13,7 @@
 
   desc("Delete generated files");
   task("cleanDir", [], function() {
-    jake.rmRf("generated");
+    jake.rmRf(GENERATED_DIR);
   });
 
   desc("Lint everything");
