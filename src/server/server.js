@@ -1,25 +1,40 @@
-"use strict";
+(function() {
 
-var http = require("http");
-var fs   = require("fs");
-var server;
+  "use strict";
 
-exports.start = function(htmlFileToServe, portNumber) {
-  if (!portNumber) throw("requires port number");
-  if (!htmlFileToServe) throw("requires html file to serve");
+  var http = require("http");
+  var fs   = require("fs");
+  var server;
 
-  server = http.createServer();
+  exports.start = function(homePageToServe, four04PageToServe, portNumber) {
+    if (!homePageToServe) throw("requires homepage to serve");
+    if (!four04PageToServe) throw("requires 404 file to serve");
+    if (!portNumber) throw("requires port number");
 
-  server.on("request", function(request, response) {
-    fs.readFile(htmlFileToServe, function (err, data) {
-    	if (err) throw err;
-    	response.end(data);
+    server = http.createServer();
+
+    server.on("request", function(request, response) {
+      if (request.url === "/" || request.url === "/index.html") {
+        response.statusCode = 200;
+        serveFile(homePageToServe, response);
+      } else {
+        response.statusCode = 404;
+        serveFile(four04PageToServe, response);
+      }
     });
-  });
 
-  server.listen(portNumber);
-};
+    server.listen(portNumber);
+  };
 
-exports.stop = function(callback) {
-  server.close(callback);
-};
+  exports.stop = function(callback) {
+    server.close(callback);
+  };
+
+  function serveFile(file, response) {
+    fs.readFile(file, function (err, data) {
+      if (err) throw err;
+      response.end(data);
+    });
+  }
+
+}());
