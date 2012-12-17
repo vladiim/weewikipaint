@@ -5,31 +5,36 @@
   var jake          = require("jake");
   var child_process = require("child_process");
   var http          = require("http");
-  
-  // exports.test_for_smoke = function(test) {
-  //   runServer(function() {
-  //     httpGet("http://localhost:8080", function(response, receivedData) {
-  //       console.log("got file");
-  //       test.done();
-  //     });
-  //   });
-  // };
+  var child;
+
+  exports.setUp = function(done) {
+    runServer(done);
+  };
+
+  exports.tearDown = function(done) {
+    child.on("exit", function(code, signal) {
+      done();
+    });
+
+    child.kill();
+  };
+
+  exports.test_canGetHomepage = function(test) {
+    httpGet("http://localhost:8080", function(response, receivedData) {
+      var foundHomePage = receivedData.indexOf("WeeWikiPaint home page") !== -1;
+      test.ok(foundHomePage, "homepage should have contained WeeWikiPaint marker");
+      test.done();
+    });
+  };
 
   function runServer(callback) {
 
-    var child = child_process.spawn("node", ["src/server/weewikipaint", "8080"]);
+    child = child_process.spawn("node", ["src/server/weewikipaint", "8080"]);
+
     child.stdout.setEncoding("utf8");
+
     child.stdout.on("data", function(chunk) {
-      process.stdout.write("server stdout: " + chunk);
       if (chunk.trim() === "Server started") callback();
-    });
-
-    child.stderr.on("data", function(chunk) {
-      process.stdout.write("server stdout: " + chunk);
-    });
-
-    child.on("exit", function(code, signal) {
-      process.stdout.write("Server process exited with code [" + code + "] and signal [" + signal + "]");
     });
   }
 
