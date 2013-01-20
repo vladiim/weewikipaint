@@ -1,7 +1,7 @@
 WeeWikiPaint
 
 Up to:
-http://www.letscodejavascript.com/v1/full_season/ep25.html
+http://www.letscodejavascript.com/v2/episodes/live/27
 
 MVP:
 - marketing home page

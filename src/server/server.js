@@ -7,9 +7,9 @@
   var server;
 
   exports.start = function(homePageToServe, four04PageToServe, portNumber, callback) {
-    if (!homePageToServe) throw("requires homepage to serve");
+    if (!homePageToServe)   throw("requires homepage to serve");
     if (!four04PageToServe) throw("requires 404 file to serve");
-    if (!portNumber) throw("requires port number");
+    if (!portNumber)        throw("requires port number");
 
     server = http.createServer();
 
