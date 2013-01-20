@@ -29,7 +29,7 @@
 
   exports.test_canGet404Page = function(test) {
     httpGet("http://localhost:8080/fail", function(response, receivedData) {
-      var found404Page = receivedData.indexOf("WeeWikiPaint 404 page") !== -1;
+      var found404Page = receivedData.indexOf("WeeWikiPaint 404") !== -1;
       test.ok(found404Page, "should have found 404 page");
       test.done();
     });
