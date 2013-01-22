@@ -1,19 +1,24 @@
-WeeWikiPaint
+# WeeWikiPaint
 
-Up to:
-http://www.letscodejavascript.com/v2/episodes/live/27
+## Up to
 
-MVP:
-- marketing home page
-- collab pain page (basic)
-- wiki-fy pages
-- complex pages?
+http://www.letscodejavascript.com/v2/episodes/live/30
 
-User stories:
-- * "hello world" server
+## MVP
 
-Engineering tasks:
+* marketing home page
+* collab pain page (basic)
+* wiki-fy pages
+* complex pages?
+
+## User stories
+
+* "hello world" server
+
+## Engineering tasks
+
 * continuous integration
 
-To do:
-- Make build fil when lint fails
+## To do
+
+* Make build fil when lint fails
