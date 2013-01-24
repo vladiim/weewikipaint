@@ -33,6 +33,7 @@
     var files = new jake.FileList();
     files.include("**/_*_test.js");
     files.exclude("node_modules");
+    files.exclude("src/server/_release_test.js");
 
     var reporter = require("nodeunit").reporters["default"];
     reporter.run(files.toArray(), null, function(failures) {
@@ -40,6 +41,13 @@
       complete();
     });
   }, {async: true});
+
+  desc("Deploy to Heroku");
+  task("deploy", ["default"], function() {
+    console.log("1. Make sure 'git status' is clean.");
+    console.log("2. 'git push heroku master'");
+    console.log("3. 'jake test'");
+  });
 
   desc("Integrate");
   task("integrate", ["default"], function() {
