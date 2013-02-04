@@ -10,6 +10,9 @@
   var TEST_HOMEPAGE = "generated/test/testHome.html";
   var TEST_404      = "generated/test/test404.html";
 
+  var PORT     = 5020;
+  var BASE_URL = "http://localhost:" + PORT;
+
   exports.tearDown = function(done) {
     cleanUpFile(TEST_HOMEPAGE);
     cleanUpFile(TEST_404);
@@ -20,7 +23,7 @@
     var testData = "HOMEPAGE DATA";
     fs.writeFileSync(TEST_HOMEPAGE, testData);
 
-    httpGet("http://localhost:8080", function(response, responseData) {
+    httpGet(BASE_URL, function(response, responseData) {
       test.equals(200, response.statusCode, "status code");
       test.equals("HOMEPAGE DATA", responseData, "response text");
       test.done();
@@ -31,7 +34,7 @@
     var testData = "404 DATA";
     fs.writeFileSync(TEST_404, testData);
 
-    httpGet("http://localhost:8080/fail", function(response, responseData) {
+    httpGet(BASE_URL + "/fail", function(response, responseData) {
       test.equals(404, response.statusCode, "status code");
       test.equals("404 DATA", responseData, "response text");
       test.done();
@@ -41,7 +44,7 @@
   exports.test_returnsHomepageWhenAskedForIndex = function(test) {
     fs.writeFileSync(TEST_HOMEPAGE, "foo");
 
-    httpGet("http://localhost:8080/index.html", function(response, responseData) {
+    httpGet(BASE_URL + "/index.html", function(response, responseData) {
       test.equals(200, response.statusCode, "status code");
       test.done();
     });
@@ -49,7 +52,7 @@
 
   exports.test_requiresHomepageParameter = function(test) {
     test.throws(function() {
-      server.start(8080);
+      server.start(PORT);
     });
     test.done();
   };
@@ -67,7 +70,7 @@
   };
   
   exports.test_runsCallbackWhenStopCompletes = function(test) {
-    server.start(TEST_HOMEPAGE, TEST_404, 8080);
+    server.start(TEST_HOMEPAGE, TEST_404, PORT);
     server.stop(function() { test.done(); });
   };
   
@@ -77,7 +80,7 @@
   };
 
   function httpGet(url, callback) {
-    server.start(TEST_HOMEPAGE, TEST_404, 8080, function() {
+    server.start(TEST_HOMEPAGE, TEST_404, PORT, function() {
       var request = http.get(url);
 
       request.on("response", function(response) {

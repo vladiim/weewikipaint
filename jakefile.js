@@ -23,13 +23,17 @@
     var files = new jake.FileList();
     files.include("**/*.js");
     files.exclude("node_modules");
+    files.exclude("testacular.conf.js");
 
     var passed = lint.validateFileList(files.toArray(), nodeLintOptions(), {});
     if (!passed) fail("Lint failed");
   });
 
   desc("Test everything");
-  task("test", ["nodeVersion", TEMP_TEST_FILE_DIR], function() {
+  task("test", ["testServer", "testClient"]);
+
+  desc("Test server code");
+  task("testServer", ["nodeVersion", TEMP_TEST_FILE_DIR], function() {
     var files = new jake.FileList();
     files.include("**/_*_test.js");
     files.exclude("node_modules");
@@ -41,6 +45,11 @@
       if (failures) fail("Tests failed");
       complete();
     });
+  }, {async: true});
+
+  desc("Test client code");
+  task("testClient", function() {
+    sh("node node_modules/.bin/testacular run", "Client test failed", complete);
   }, {async: true});
 
   desc("Deploy to Heroku");
@@ -99,13 +108,17 @@
     return [major, minor, bugfix];
   }
 
-  function sh(command, callback) {
+  function sh(command, errorMessage, callback) {
     console.log("> " + command);
     var stdout = "";
     var process = jake.createExec(command, { printStdout: true, printSterr: true });
 
     process.on("stdout", function(chunk) {
       stdout += chunk;
+    });
+
+    process.on("error", function(chunk) {
+      fail(errorMessage);
     });
 
     process.on("cmdEnd", function() {
