@@ -2,7 +2,7 @@
 
 ## Up to
 
-http://www.letscodejavascript.com/v3/episodes/live/38
+http://www.letscodejavascript.com/v3/episodes/live/38 - up to 7 mins
 
 ## MVP
 
