@@ -5,6 +5,7 @@
   var NODE_VERSION       = "v0.8.14";
   var GENERATED_DIR      = "generated";
   var TEMP_TEST_FILE_DIR = GENERATED_DIR + "/test";
+  var SUPPORTED_BROWSERS = ['Chrome 24.0', 'Safari 6.0'];
 
   var lint     = require("./build/lint/lint_runner.js");
   var nodeUnit = require("nodeunit").reporters["default"];
@@ -52,14 +53,36 @@
 
   desc("Test client code");
   task("testClient", function() {
-    sh("node node_modules/.bin/testacular run", "Client test failed", function(output) {
-      var SUPPORTED_BROWSERS = ['Chrome 24.0', 'Safari 6.0'];
+    var config = {};
+    var output = "";
+
+    var oldStdoutWrite = process.stdout.write;
+
+    process.stdout.write = function(data) {
+      output += data;
+      oldStdoutWrite.apply(this, arguments);
+    };
+
+    require("testacular/lib/runner").run(config, function(exitCode) {
+      process.stdout.write = oldStdoutWrite;
+
+      if (exitCode) fail("Client tests failed (to start server, run `jake testacular`");
+
+      var browserMissing = false;
       SUPPORTED_BROWSERS.forEach(function(browser) {
-        assertBrowserIsTested(browser, output);
+        browserMissing = checkIfBrowserTested(browser, output) || browserMissing;
       });
-      if (output.indexOf("TOTAL: 0 SUCCESS") !== -1) fail("Client tests did not run");
+
+      if (browserMissing && !process.env.loose) fail("Did not test all supported browsers (user `loose=true` to run anyway");
+        if (output.indexOf("TOTAL 0 SUCCESS") !== -1) fail("Client tests did not run!");
     });
   }, {async: true});
+
+  function checkIfBrowserTested(browser, output) {
+    var missing = output.indexOf(browser + ": Executed") === -1;
+    if (missing) console.log(browser + " was not tested!");
+    return missing;
+  }
 
   function assertBrowserIsTested(browser_name, output) {
     var search_string = browser_name + ': Executed';
