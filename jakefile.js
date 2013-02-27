@@ -5,7 +5,7 @@
   var NODE_VERSION       = "v0.8.14";
   var GENERATED_DIR      = "generated";
   var TEMP_TEST_FILE_DIR = GENERATED_DIR + "/test";
-  var SUPPORTED_BROWSERS = ['Chrome 24.0', 'Safari 6.0'];
+  var SUPPORTED_BROWSERS = ['Chrome 25.0', 'Safari 6.0'];
 
   var lint     = require("./build/lint/lint_runner.js");
   var nodeUnit = require("nodeunit").reporters["default"];
@@ -13,7 +13,9 @@
   directory(TEMP_TEST_FILE_DIR);
 
   desc("Build and test");
-  task("default", ["lint", "test"]);
+  task("default", ["lint", "test"], function() {
+    console.log("\n\nEVERYTHING OK!");
+  });
 
   desc("Start Testacular server for testing");
   task("testacular", function() {
@@ -204,6 +206,7 @@
     var node_files = new jake.FileList();
     node_files.include("**/*.js");
     node_files.exclude("node_modules");
+    node_files.exclude("vendor_client");
     node_files.exclude("testacular.conf.js");
     node_files.exclude("src/client");
     node_files = node_files.toArray();

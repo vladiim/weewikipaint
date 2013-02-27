@@ -2,7 +2,7 @@
 
 ## Up to
 
-http://www.letscodejavascript.com/v3/episodes/live/39
+http://www.letscodejavascript.com/v3/episodes/live/43
 
 ## MVP
 
